@@ -1,5 +1,5 @@
-=== WPCF ===
-Contributors: wordpress.org/haruncpi 
+﻿=== WPCF ===
+Contributors: haruncpi 
 Donate link:http://learn24bd.com
 Tags: wordpress contact form
 Requires at least: 3.0
