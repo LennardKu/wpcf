@@ -1,0 +1,16 @@
+input,textarea{
+			width: 95%;
+		}
+		input[type='submit'],input[type='reset']
+		{
+			width: 20%;
+			margin-top: 10px;
+		}
+		.error{
+			color: #f00;
+			display: block;
+		}
+
+		#statusMsg{
+			display: none;
+		}
