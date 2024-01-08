@@ -35,7 +35,7 @@ function wpcf_make_sortcode( $atts ) {
 		
 	</div>
 
-    <form id="wpcf" action="<?php echo admin_url('admin-ajax.php'); ?>" method="POST">
+    <form id="wpcf" data-wpcf="form" action="<?php echo admin_url('admin-ajax.php'); ?>" method="POST">
     	<input type="hidden" name="action" value="wpcf_ajax">
 	    <label for="txtName">Your Name</label>
 		<input type="text" name="txtName" required>
