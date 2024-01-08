@@ -1,35 +1,42 @@
-jQuery(document).ready(function() {
-    //validattion
-    jQuery(function() {
-            jQuery("#wpcf").validate();
-        })
-        //end validation
+document.addEventListener('DOMContentLoaded', function() {
+    // Select all elements with data-wpcf="form" attribute
+    var forms = document.querySelectorAll('[data-wpcf="form"]');
+    
+    // Iterate through each form
+    forms.forEach(function(form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
 
-    jQuery('#wpcf').submit(function(e) {
-        var url = jQuery(this).attr('action');
-        var data = jQuery(this).serialize();
+            // Serialize form data
+            var formData = new FormData(form);
 
-        jQuery.ajax({
-            type: "POST",
-            url: url,
-            data: data,
-            success: function(data) {
-                if (data == 'success') {
-                    jQuery('#wpcf').slideUp('slow');
-                    jQuery('#statusMsg').html('Your message successfully send!');
-                    jQuery('#statusMsg').css({
-                        display: 'block',
-                        color: 'green'
-                    });
+            // AJAX request
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', form.getAttribute('action'), true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    if (xhr.responseText === 'success') {
+                        // On success
+                        form.style.display = 'none'; // Hide the form
+                        var statusMsg = document.getElementById('statusMsg');
+                        if (statusMsg) {
+                            statusMsg.innerHTML = 'Your message was successfully sent!';
+                            statusMsg.style.display = 'block';
+                            statusMsg.style.color = 'green';
+                        }
+                    }
+                } else {
+                    // On error
+                    alert(xhr.statusText);
                 }
+            };
+            xhr.onerror = function() {
+                // On network errors
+                alert('There was an error with the request.');
+            };
+            xhr.send(formData); // Send form data
 
-            },
-            error: function(errorThrown) {
-                alert(errorThrown);
-            }
-
+            return false; // Prevent default form submission
         });
-        return false;
-
     });
 });
